@@ -1,0 +1,19 @@
+server:
+  port: 8085
+spring:
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+dubbo:
+  application:
+    name: annotation-provider-demo
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    client: curator
+  protocol:
+    name: dubbo
+    port: 20880
