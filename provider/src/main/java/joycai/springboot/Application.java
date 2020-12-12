@@ -29,8 +29,6 @@ public class Application {
 
     static Logger logger = LoggerFactory.getLogger(Application.class);
 
-    static boolean debugMode = true;
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
@@ -41,42 +39,7 @@ public class Application {
      */
     @Autowired
     public Application(ApplicationArguments args) {
-        //如果入参包含release则表示为生产模式
-        debugMode = !args.containsOption("release");
-        List<String> files = args.getNonOptionArgs();
 
-        logger.info(debugMode ? "run in debug" : "run in release");
     }
 
-    /**
-     * 载入配置文件
-     * @return
-     */
-    @Bean(name = "serviceConfig")
-    public Properties appConfig() {
-        try {
-            Properties p = new Properties();
-
-            Resource frs = new FileSystemResource("serverconfig.properties");
-            if (frs.exists()) {
-                logger.info("加载外部配置文件");
-                p.load(frs.getInputStream());
-            } else {
-                logger.info("加载默认配置文件");
-                if (debugMode) {
-                    //加载测试配置
-                    Resource rs = new ClassPathResource("debug.properties");
-                    p.load(rs.getInputStream());
-                } else {
-                    //加载生产配置
-                    Resource rs = new ClassPathResource("release.properties");
-                    p.load(rs.getInputStream());
-                }
-            }
-            return p;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }

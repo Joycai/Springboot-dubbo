@@ -1,3 +1,5 @@
 rootProject.name = "Springboot-dubbo"
 include 'client'
 include 'provider'
+include 'core'
+

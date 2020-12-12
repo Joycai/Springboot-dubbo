@@ -10,10 +10,10 @@ spring:
       ddl-auto: update
 dubbo:
   application:
-    name: annotation-provider
+    name: my-provider
   registry:
     address: zookeeper://127.0.0.1:2181
     client: curator
   protocol:
     name: dubbo
-    port: 20880
+    port: 20890

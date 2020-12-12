@@ -1,12 +1,17 @@
-allprojects{
+allprojects {
     group 'joycai'
     version '0.0.1-SNAPSHOT'
+}
+
+ext {
+    curatorVersion = "5.1.0"
+    dubboVersion = "2.7.8"
 }
 
 subprojects {
     apply plugin: 'java'
 
-    java{
+    java {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -14,18 +19,12 @@ subprojects {
         jcenter()
         mavenCentral()
     }
-    dependencies{
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation "org.slf4j:slf4j-api:1.7.+"
+    dependencies {
         implementation "ch.qos.logback:logback-classic:1.2.+"
-        implementation group: 'org.apache.dubbo', name: 'dubbo-spring-boot-starter', version: '2.7.8'
-        implementation group: 'org.apache.curator', name: 'curator-recipes', version: '5.1.0'
-
         implementation "com.google.guava:guava:29.0-jre"
-        runtimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
-        testImplementation('org.springframework.boot:spring-boot-starter-test') {
-            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-        }
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+        testImplementation 'org.mockito:mockito-core:3.6.28'
     }
     tasks.withType(JavaCompile) {
         options.encoding = "UTF-8"
@@ -36,13 +35,47 @@ subprojects {
     }
 }
 
-project(":client"){
+project(":core") {
     dependencies {
 
     }
 }
 
-project(":provider"){
+project(":client") {
     dependencies {
+        implementation(project(':core'))
+        implementation('org.springframework.boot:spring-boot-starter-web')
+        implementation("org.apache.curator:curator-recipes:$curatorVersion"){
+            exclude group: 'com.google.guava'
+        }
+        implementation("org.apache.dubbo:dubbo-spring-boot-starter:$dubboVersion") {
+            exclude group: 'org.springframework'
+            exclude group: 'javax.servlet', module: "servlet-api"
+            exclude group: 'log4j', module: "log4j"
+
+        }
+        runtimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+    }
+}
+
+project(":provider") {
+    dependencies {
+        implementation(project(':core'))
+        implementation('org.springframework.boot:spring-boot-starter-web')
+        implementation("org.apache.curator:curator-recipes:$curatorVersion"){
+            exclude group: 'com.google.guava'
+        }
+        implementation("org.apache.dubbo:dubbo-spring-boot-starter:$dubboVersion") {
+            exclude group: 'org.springframework'
+            exclude group: 'javax.servlet', module: "servlet-api"
+            exclude group: 'log4j', module: "log4j"
+        }
+        runtimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
     }
 }
