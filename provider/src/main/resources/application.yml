@@ -17,3 +17,4 @@ dubbo:
   protocol:
     name: dubbo
     port: 20890
+    serialization: fst

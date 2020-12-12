@@ -1,13 +1,19 @@
 plugins {
     id 'org.springframework.boot' version '2.3.6.RELEASE' apply false
     id 'io.spring.dependency-management' version '1.0.10.RELEASE' apply false
-    id "org.jetbrains.kotlin.jvm" version "1.4.20" apply false
+    id "org.jetbrains.kotlin.jvm" version "1.4.20" apply true
+    id 'org.jetbrains.kotlin.plugin.serialization' version "1.4.20" apply true
     id "org.jetbrains.kotlin.plugin.spring" version "1.4.20" apply false
-    id "org.jetbrains.kotlin.plugin.noarg" version "1.4.20" apply false
+    id "org.jetbrains.kotlin.plugin.noarg" version "1.4.20" apply true
 }
 allprojects {
     group 'joycai'
     version '0.0.1-SNAPSHOT'
+}
+
+repositories{
+    jcenter()
+    mavenCentral()
 }
 
 ext {
@@ -27,6 +33,7 @@ subprojects {
         mavenCentral()
     }
     dependencies {
+        implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
         implementation "ch.qos.logback:logback-classic:1.2.+"
         implementation "com.google.guava:guava:29.0-jre"
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
@@ -51,10 +58,12 @@ project(":core") {
 project(":client") {
     dependencies {
         implementation(project(':core'))
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.+")
         implementation('org.springframework.boot:spring-boot-starter-web')
         implementation("org.apache.curator:curator-recipes:$curatorVersion"){
             exclude group: 'com.google.guava'
         }
+        implementation("org.apache.dubbo:dubbo-serialization-fst:$dubboVersion")
         implementation("org.apache.dubbo:dubbo-spring-boot-starter:$dubboVersion") {
             exclude group: 'org.springframework'
             exclude group: 'javax.servlet', module: "servlet-api"
@@ -71,7 +80,9 @@ project(":client") {
 project(":provider") {
     dependencies {
         implementation(project(':core'))
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.+")
         implementation('org.springframework.boot:spring-boot-starter-web')
+        implementation("org.apache.dubbo:dubbo-serialization-fst:$dubboVersion")
         implementation("org.apache.curator:curator-recipes:$curatorVersion"){
             exclude group: 'com.google.guava'
         }

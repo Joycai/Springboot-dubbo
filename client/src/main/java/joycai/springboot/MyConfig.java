@@ -1,5 +1,7 @@
 package joycai.springboot;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.module.kotlin.KotlinModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -22,5 +24,10 @@ public class MyConfig {
                 registry.addMapping("/**");
             }
         };
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        return (new ObjectMapper()).registerModule(new KotlinModule());
     }
 }

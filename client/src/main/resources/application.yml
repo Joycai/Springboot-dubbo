@@ -16,4 +16,5 @@ dubbo:
     client: curator
   protocol:
     name: dubbo
+    serialization: fst
 #    port: 20890
