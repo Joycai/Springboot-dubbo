@@ -10,9 +10,9 @@ import java.util.Locale;
  */
 public class MessageLoader {
 
-    final static String bundleName = "message";
+    private static final String bundleName = "message";
 
-    static MessageLoader instance = null;
+    private static MessageLoader instance = null;
 
     public static MessageLoader getInstance() {
         if (instance == null) {

@@ -5,7 +5,6 @@ import joycai.springboot.model.UserEntity;
 import joycai.springboot.repository.UserRepo;
 import joycai.springboot.service.UserAccountService;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -16,8 +15,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     UserRepo userRepo;
 
-    @Autowired
-    public void setUserRepo(UserRepo userRepo) {
+    public UserAccountServiceImpl(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
 
@@ -33,6 +31,6 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public Long countUser() {
-        return 123l;
+        return userRepo.count();
     }
 }
