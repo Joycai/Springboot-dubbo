@@ -37,7 +37,7 @@ public class MockUserRepo implements UserRepo {
             userEntity.setId(getIdAndAdd());
             userEntityList.add(userEntity);
         } else {
-            Optional<UserEntity> entity = userEntityList.stream().filter(it -> it.getId() == userEntity.getId()).findFirst();
+            Optional<UserEntity> entity = userEntityList.stream().filter(it -> it.getId().equals(userEntity.getId())).findFirst();
             if (entity.isPresent()) {
                 UserEntity db = entity.get();
                 db.setUsername(userEntity.getUsername());

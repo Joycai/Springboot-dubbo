@@ -26,6 +26,9 @@ ext {
 sonarqube {
     properties {
         property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.host.url","http://localhost:9000"
+        property "sonar.login","952457ed18ae4adf9b009c97b8c228ee84cc893c"
+        property "sonar.projectKey","Springboot-dubbo"
     }
 }
 
