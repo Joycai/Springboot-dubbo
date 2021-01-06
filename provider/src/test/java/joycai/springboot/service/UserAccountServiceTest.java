@@ -37,7 +37,7 @@ public class UserAccountServiceTest {
     }
 
     @Test
-    void test() {
+    void apiTest() {
         Assertions.assertTrue(userAccountService.login(new UserDto("admin", "12345", false)));
         Assertions.assertFalse(userAccountService.login(new UserDto("user1", "12345", false)));
         Assertions.assertFalse(userAccountService.login(new UserDto("user2", "12345", false)));

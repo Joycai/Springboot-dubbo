@@ -5,6 +5,8 @@ plugins {
     id 'org.jetbrains.kotlin.plugin.serialization' version "1.4.20" apply true
     id "org.jetbrains.kotlin.plugin.spring" version "1.4.20" apply false
     id "org.jetbrains.kotlin.plugin.noarg" version "1.4.20" apply true
+    id "jacoco"
+    id "org.sonarqube" version "3.0"
 }
 allprojects {
     group 'joycai'
@@ -21,14 +23,23 @@ ext {
     dubboVersion = "2.7.8"
 }
 
+sonarqube {
+    properties {
+        property "sonar.sourceEncoding", "UTF-8"
+    }
+}
+
 subprojects {
     apply plugin: 'java'
+    apply plugin: 'jacoco'
 
     java {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         jcenter()
         mavenCentral()
     }
@@ -46,6 +57,34 @@ subprojects {
 
     test {
         useJUnitPlatform()
+    }
+
+    jacoco {
+        toolVersion = "0.8.4"
+    }
+
+    jacocoTestReport.dependsOn(test){
+
+    }
+
+    jacocoTestReport {
+
+        reports {
+            xml.enabled true
+            csv.enabled false
+            html.enabled true
+        }
+    }
+
+    sonarqube {
+        properties {
+            property "sonar.sources", "src/main/java"
+        }
+    }
+
+    tasks.withType(Test) {
+        scanForTestClasses = false
+        include "**/*Test.class"
     }
 }
 
