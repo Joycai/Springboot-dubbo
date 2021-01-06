@@ -66,12 +66,15 @@ subprojects {
         toolVersion = "0.8.4"
     }
 
-    jacocoTestReport.dependsOn(test){
-
-    }
-
     jacocoTestReport {
-
+        dependsOn test
+        afterEvaluate {
+            getClassDirectories().setFrom(classDirectories.files.collect {
+                fileTree(dir: it, exclude: [ '**/Application**',
+                                             '**/MyConfig**',
+                                             '**/SchedulingConfig**'])
+            })
+        }
         reports {
             xml.enabled true
             csv.enabled false
