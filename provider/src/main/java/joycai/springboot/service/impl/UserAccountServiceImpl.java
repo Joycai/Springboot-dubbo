@@ -22,11 +22,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     @Override
     public Boolean login(UserDto userDto) {
         Optional<UserEntity> user = userRepo.findByName(userDto.getUsername());
-        if (user.isPresent()) {
-            return user.get().getEnabled() && user.get().getPassword().equals(userDto.getPassword());
-        }else {
-            return false;
-        }
+        return user.filter(userEntity -> userEntity.getEnabled() && userEntity.getPassword().equals(userDto.getPassword())).isPresent();
     }
 
     @Override

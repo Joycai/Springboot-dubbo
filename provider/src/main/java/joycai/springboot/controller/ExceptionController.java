@@ -23,7 +23,7 @@ public class ExceptionController {
      */
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public ResponseEntity exceptionHandler(Exception e){
-        return new ResponseEntity<String>(e.getMessage(), HttpStatus.OK);
+    public ResponseEntity<String> exceptionHandler(Exception e){
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);
     }
 }

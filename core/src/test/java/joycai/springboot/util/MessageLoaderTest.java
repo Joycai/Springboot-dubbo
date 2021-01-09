@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
 
-public class MessageLoaderTest {
+class MessageLoaderTest {
 
     @Test
     void test() {

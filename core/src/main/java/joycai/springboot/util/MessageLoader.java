@@ -10,7 +10,7 @@ import java.util.Locale;
  */
 public class MessageLoader {
 
-    private static final String bundleName = "message";
+    private static final String BUNDLE_NAME = "message";
 
     private static MessageLoader instance = null;
 
@@ -24,10 +24,10 @@ public class MessageLoader {
     MessageSource messageSource;
 
     private MessageLoader() {
-        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasename(bundleName);
-        messageSource.setDefaultEncoding("UTF-8");
-        this.messageSource = messageSource;
+        ResourceBundleMessageSource bundleMessageSource = new ResourceBundleMessageSource();
+        bundleMessageSource.setBasename(BUNDLE_NAME);
+        bundleMessageSource.setDefaultEncoding("UTF-8");
+        this.messageSource = bundleMessageSource;
     }
 
     public String getMessage(final String key, final Locale locale) {

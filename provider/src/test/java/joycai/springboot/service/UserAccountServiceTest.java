@@ -11,7 +11,7 @@ import org.mockito.Mockito;
 
 import java.util.Optional;
 
-public class UserAccountServiceTest {
+class UserAccountServiceTest {
 
     UserRepo userRepo;
 
