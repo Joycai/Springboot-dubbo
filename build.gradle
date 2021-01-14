@@ -13,7 +13,7 @@ allprojects {
     version '0.0.1-SNAPSHOT'
 }
 
-repositories{
+repositories {
     jcenter()
     mavenCentral()
 }
@@ -26,6 +26,9 @@ ext {
 sonarqube {
     properties {
         property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.projectKey", "Joycai_Springboot-dubbo"
+        property "sonar.organization", "joycai"
+        property "sonar.host.url", "https://sonarcloud.io"
     }
 }
 
@@ -67,9 +70,9 @@ subprojects {
         dependsOn test
         afterEvaluate {
             getClassDirectories().setFrom(classDirectories.files.collect {
-                fileTree(dir: it, exclude: [ '**/Application**',
-                                             '**/MyConfig**',
-                                             '**/SchedulingConfig**'])
+                fileTree(dir: it, exclude: ['**/Application**',
+                                            '**/MyConfig**',
+                                            '**/SchedulingConfig**'])
             })
         }
         reports {
@@ -102,7 +105,7 @@ project(":client") {
         implementation(project(':core'))
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.+")
         implementation('org.springframework.boot:spring-boot-starter-web')
-        implementation("org.apache.curator:curator-recipes:$curatorVersion"){
+        implementation("org.apache.curator:curator-recipes:$curatorVersion") {
             exclude group: 'com.google.guava'
         }
         implementation("org.apache.dubbo:dubbo-serialization-fst:$dubboVersion")
@@ -125,7 +128,7 @@ project(":provider") {
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.+")
         implementation('org.springframework.boot:spring-boot-starter-web')
         implementation("org.apache.dubbo:dubbo-serialization-fst:$dubboVersion")
-        implementation("org.apache.curator:curator-recipes:$curatorVersion"){
+        implementation("org.apache.curator:curator-recipes:$curatorVersion") {
             exclude group: 'com.google.guava'
         }
         implementation("org.apache.dubbo:dubbo-spring-boot-starter:$dubboVersion") {
