@@ -1,4 +1,7 @@
-# Springboot-dubbo
+# Springboot-dubbo 
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Joycai_Springboot-dubbo&metric=alert_status)](https://sonarcloud.io/dashboard?id=Joycai_Springboot-dubbo)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Joycai_Springboot-dubbo&metric=coverage)](https://sonarcloud.io/dashboard?id=Joycai_Springboot-dubbo)
 
 springboot整合dubbo的工程示例，采用了zookeeper作为注册中心。
 
