@@ -13,8 +13,12 @@ import java.util.Map;
 @RestController
 public class LoginController {
 
-    @DubboReference(interfaceClass = UserAccountService.class, version = "1.0")
     UserAccountService userAccountService;
+
+    @DubboReference(interfaceClass = UserAccountService.class, version = "1.0")
+    public void setUserAccountService(UserAccountService userAccountService) {
+        this.userAccountService = userAccountService;
+    }
 
     @PostMapping("login")
     public Map<String, Object> login(@RequestBody UserDto userDto) {

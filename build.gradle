@@ -47,6 +47,10 @@ subprojects {
         mavenCentral()
     }
     dependencies {
+        implementation "com.alibaba:dubbo-registry-nacos:2.7.7"
+        implementation "com.alibaba.nacos:nacos-client:2.1.0"
+        implementation 'com.alibaba.spring:spring-context-support:1.0.11'
+        implementation 'org.apache.commons:commons-lang3:3.12.0'
         implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
         implementation "ch.qos.logback:logback-classic:1.2.+"
         implementation "com.google.guava:guava:29.0-jre"
@@ -105,9 +109,6 @@ project(":client") {
         implementation(project(':core'))
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.+")
         implementation('org.springframework.boot:spring-boot-starter-web')
-        implementation("org.apache.curator:curator-recipes:$curatorVersion") {
-            exclude group: 'com.google.guava'
-        }
         implementation("org.apache.dubbo:dubbo-serialization-fst:$dubboVersion")
         implementation("org.apache.dubbo:dubbo-spring-boot-starter:$dubboVersion") {
             exclude group: 'org.springframework'
@@ -128,9 +129,6 @@ project(":provider") {
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.+")
         implementation('org.springframework.boot:spring-boot-starter-web')
         implementation("org.apache.dubbo:dubbo-serialization-fst:$dubboVersion")
-        implementation("org.apache.curator:curator-recipes:$curatorVersion") {
-            exclude group: 'com.google.guava'
-        }
         implementation("org.apache.dubbo:dubbo-spring-boot-starter:$dubboVersion") {
             exclude group: 'org.springframework'
             exclude group: 'javax.servlet', module: "servlet-api"

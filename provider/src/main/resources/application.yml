@@ -12,8 +12,7 @@ dubbo:
   application:
     name: my-provider
   registry:
-    address: zookeeper://127.0.0.1:2181
-    client: curator
+    address: nacos://10.211.55.3:8848
   protocol:
     name: dubbo
     port: 20890
