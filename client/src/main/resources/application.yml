@@ -15,5 +15,3 @@ dubbo:
     address: nacos://10.211.55.3:8848
   protocol:
     name: dubbo
-    serialization: fst
-#    port: 20890

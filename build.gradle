@@ -20,7 +20,7 @@ repositories {
 
 ext {
     curatorVersion = "5.1.0"
-    dubboVersion = "2.7.8"
+    dubboVersion = "3.0.5"
 }
 
 sonarqube {
@@ -43,16 +43,15 @@ subprojects {
     repositories {
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/spring' }
-        jcenter()
         mavenCentral()
     }
     dependencies {
-        implementation "com.alibaba:dubbo-registry-nacos:2.7.7"
-        implementation "com.alibaba.nacos:nacos-client:2.1.0"
+        implementation "org.apache.dubbo:dubbo-registry-nacos:$dubboVersion"
+        implementation 'com.alibaba.nacos:nacos-client:2.1.0'
         implementation 'com.alibaba.spring:spring-context-support:1.0.11'
         implementation 'org.apache.commons:commons-lang3:3.12.0'
         implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
-        implementation "ch.qos.logback:logback-classic:1.2.+"
+        implementation "ch.qos.logback:logback-classic:1.2.11"
         implementation "com.google.guava:guava:29.0-jre"
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
@@ -109,14 +108,13 @@ project(":client") {
         implementation(project(':core'))
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.+")
         implementation('org.springframework.boot:spring-boot-starter-web')
-        implementation("org.apache.dubbo:dubbo-serialization-fst:$dubboVersion")
+//        implementation("org.apache.dubbo:dubbo-serialization-fst:$dubboVersion")
         implementation("org.apache.dubbo:dubbo-spring-boot-starter:$dubboVersion") {
             exclude group: 'org.springframework'
             exclude group: 'javax.servlet', module: "servlet-api"
             exclude group: 'log4j', module: "log4j"
 
         }
-        runtimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
             exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         }
@@ -128,13 +126,12 @@ project(":provider") {
         implementation(project(':core'))
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.+")
         implementation('org.springframework.boot:spring-boot-starter-web')
-        implementation("org.apache.dubbo:dubbo-serialization-fst:$dubboVersion")
+//        implementation("org.apache.dubbo:dubbo-serialization-fst:$dubboVersion")
         implementation("org.apache.dubbo:dubbo-spring-boot-starter:$dubboVersion") {
             exclude group: 'org.springframework'
             exclude group: 'javax.servlet', module: "servlet-api"
             exclude group: 'log4j', module: "log4j"
         }
-        runtimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
             exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         }

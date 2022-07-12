@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@DubboService(interfaceClass = UserAccountService.class,version = "1.0")
+@DubboService(interfaceClass = UserAccountService.class, version = "1.0")
 @Component
 public class UserAccountServiceImpl implements UserAccountService {
 

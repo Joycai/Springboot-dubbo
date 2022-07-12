@@ -11,9 +11,11 @@ spring:
 dubbo:
   application:
     name: my-provider
+    qos-enable: false
+    qos-accept-foreign-ip: false
   registry:
     address: nacos://10.211.55.3:8848
+    protocol: dubbo
   protocol:
     name: dubbo
     port: 20890
-    serialization: fst
